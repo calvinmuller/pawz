@@ -30,7 +30,8 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'polar-citadel-30479.herokuapp.com',
     '127.0.0.1',
-    'localhost:8000'
+    'localhost:8000',
+    'pawzpython.herokuapp.com'
 ]
 
 # Application definition
