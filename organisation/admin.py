@@ -5,7 +5,7 @@ from .models import Organisation, Status
 
 
 class OrganisationAdmin(admin.ModelAdmin):
-    list_display = ('name', 'slug', 'address', 'owner', 'status')
+    list_display = ('name', 'slug', 'address', 'owner', 'status', 'image_tag')
     fieldsets = [
         (None, {'fields': ['name', 'slug', 'address', 'owner', 'can_donate', 'featured', 'image', 'status']})
     ]

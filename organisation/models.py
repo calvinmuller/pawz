@@ -1,6 +1,9 @@
+from django.conf.urls.static import static
 from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
+from django.utils.safestring import mark_safe
+
 
 class Status(models.Model):
     name = models.CharField(max_length=255)
@@ -30,3 +33,8 @@ class Organisation(models.Model):
     def __str__(self):
         """Return a human readable representation of the model instance."""
         return "{}".format(self.name)
+
+    def image_tag(self):
+        return mark_safe('<img src="%s" width="150" height="150" />' % self.image)
+
+    image_tag.short_description = 'Image'
