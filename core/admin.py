@@ -3,6 +3,10 @@ from django.contrib import admin
 # Register your models here.
 from .models import Organisation, Status, OrganisationImage, Paw, Breed, Colour, PawImage
 
+class PawsInline(admin.TabularInline):
+    model = Paw
+    extra = 1
+    readonly_fields = ['slug']
 
 class OrganisationbImageInline(admin.TabularInline):
     model = OrganisationImage
@@ -21,7 +25,7 @@ class OrganisationAdmin(admin.ModelAdmin):
     ]
     list_filter = ['date_created']
     readonly_fields = ['slug']
-    inlines = [OrganisationbImageInline, ]
+    inlines = [OrganisationbImageInline, PawsInline, ]
 
 
 class StatusAdmin(admin.ModelAdmin):

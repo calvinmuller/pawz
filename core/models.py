@@ -89,8 +89,8 @@ class Paw(models.Model):
     can_donate = models.BooleanField(default=False)
     can_adopt = models.BooleanField(default=False)
 
-    favourite_toy = models.TextField(blank=True)
-    favourite_food = models.TextField(blank=True)
+    favourite_toy = models.CharField(blank=True, max_length=255)
+    favourite_food = models.CharField(blank=True, max_length=255)
 
     date_of_birth = models.DateField(blank=True, null=True)
     found_at = models.DateField(auto_now=True, blank=True, null=True)

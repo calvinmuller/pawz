@@ -28,7 +28,8 @@ ALLOWED_HOSTS = [
     'polar-citadel-30479.herokuapp.com',
     '127.0.0.1',
     'localhost:8000',
-    'pawzpython.herokuapp.com'
+    'pawzpython.herokuapp.com',
+    'localhost'
 ]
 
 # Application definition
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'storages',
     'core',
+    'blog',
     'rest_framework',  # Add this line
 ]
 
@@ -161,3 +163,7 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10,
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',)
 }
+
+
+# user auth stuff
+LOGIN_REDIRECT_URL = '/'
