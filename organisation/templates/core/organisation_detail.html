@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>{{ organisation.name }}</h1>
+    <ul>
+        {% for paw in organisation.paw_set.all %}
+            <li>{{ paw.name }}</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

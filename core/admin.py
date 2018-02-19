@@ -24,8 +24,8 @@ class OrganisationAdmin(admin.ModelAdmin):
         (None, {'fields': ['name', 'slug', 'address', 'owner', 'can_donate', 'featured', 'logo', 'status']})
     ]
     list_filter = ['date_created']
-    readonly_fields = ['slug']
     inlines = [OrganisationbImageInline, PawsInline, ]
+    prepopulated_fields = {'slug': ('name',)}
 
 
 class StatusAdmin(admin.ModelAdmin):
@@ -43,14 +43,15 @@ class PawAdmin(admin.ModelAdmin):
         (None, {'fields': ['name', 'slug', 'organisation', 'picture']}),
         ('Information', {'fields': ['colour', 'breed', 'breed_other', 'can_adopt', 'can_donate', 'status']}),
         ('Favourites', {'fields': ['favourite_food', 'favourite_toy', ]}),
+        ('Social', {'fields': ['instagram' ]}),
         ('Dates', {'fields': ['date_of_birth', 'adopted_at']})
     ]
     list_filter = (
         ('colour__name'),
         ('breed__name'),
     )
-    readonly_fields = ['slug']
     inlines = [PawsImageInline, ]
+    prepopulated_fields = {'slug': ('name',)}
 
 
 class BreedAdmin(admin.ModelAdmin):

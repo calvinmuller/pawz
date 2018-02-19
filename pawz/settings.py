@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'storages',
     'core',
+    'organisation',
     'blog',
     'rest_framework',  # Add this line
 ]
@@ -163,7 +164,6 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10,
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',)
 }
-
 
 # user auth stuff
 LOGIN_REDIRECT_URL = '/'

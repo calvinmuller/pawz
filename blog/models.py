@@ -14,6 +14,10 @@ class Post(models.Model):
     def __unicode__(self):
         return '%s' % self.title
 
+    def __str__(self):
+        """Return a human readable representation of the model instance."""
+        return  '%s' % self.title
+
     @permalink
     def get_absolute_url(self):
         return ('view_blog_post', None, {'slug': self.slug})
@@ -25,6 +29,13 @@ class Category(models.Model):
     def __unicode__(self):
         return '%s' % self.title
 
+    def __str__(self):
+        """Return a human readable representation of the model instance."""
+        return  '%s' % self.title
+
     @permalink
     def get_absolute_url(self):
         return ('view_blog_category', None, {'slug': self.slug})
+
+    class Meta:
+        verbose_name_plural = "categories"

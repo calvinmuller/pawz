@@ -83,6 +83,7 @@ class Paw(models.Model):
     picture = models.ImageField(upload_to='paw')
     colour = models.ForeignKey('Colour', on_delete=models.CASCADE)
     breed = models.ForeignKey('Breed', on_delete=models.CASCADE)
+    instagram = models.CharField(max_length=255, blank=True, null=True)
 
     breed_other = models.CharField(max_length=255, blank=True)
 

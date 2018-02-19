@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% if latest_organisation_list %}
+    <ul>
+    {% for organisation in latest_organisation_list %}
+        <li><a href="{% url 'organisation:detail' organisation.slug %}">{{ organisation.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No organisations are available.</p>
+{% endif %}
+
+{%  endblock %}

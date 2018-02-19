@@ -18,11 +18,11 @@ from django.contrib import admin
 from django.urls import path, include
 from django.utils.translation import ugettext_lazy as _
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls')),
     url('^', include('django.contrib.auth.urls')),
+    path('organisations/', include('organisation.urls')),
 ]
 
 admin.site.site_header = _("Pawz")
