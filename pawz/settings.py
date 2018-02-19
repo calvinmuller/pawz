@@ -19,12 +19,19 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '$b!7i4clk=%j6&(0*g)@!^_##5ek$4txqt44+$kh^i&ne2bb@8'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'cg#p$g+j9tax!#a3cup@1$8obt2_+&k3q+pmu)5%asj6yjpkag')
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = bool( os.environ.get('DJANGO_DEBUG', True) )
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'polar-citadel-30479.herokuapp.com',
+    '127.0.0.1',
+    'localhost:8000'
+]
 
 # Application definition
 
@@ -36,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'website',
-    'organisation'
+    'organisation',
+    'rest_framework',  # Add this line
 ]
 
 MIDDLEWARE = [
@@ -79,6 +87,10 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+import dj_database_url
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
