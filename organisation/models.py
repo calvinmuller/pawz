@@ -18,7 +18,7 @@ class Organisation(models.Model):
     address = models.TextField()
     telephone = models.TextField()
     email = models.EmailField()
-    image = models.ImageField()
+    image = models.ImageField(upload_to='organisations')
     owner = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     status = models.ForeignKey('Status', on_delete=models.CASCADE)
     can_donate = models.BooleanField()
