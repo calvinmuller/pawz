@@ -39,13 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.messages',
+    # 'django.contrib.messages',
     'django.contrib.staticfiles',
     'storages',
     'core',
     'organisation',
     'blog',
-    'rest_framework',  # Add this line
+    # 'rest_framework',  # Add this line
 ]
 
 MIDDLEWARE = [
@@ -167,3 +167,16 @@ REST_FRAMEWORK = {
 
 # user auth stuff
 LOGIN_REDIRECT_URL = '/'
+
+
+# CACHING
+CACHES = {
+  'default': {
+    'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    'LOCATION': '127.0.0.1:11211',
+  },
+  'staticfiles': {
+    'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    'LOCATION': 'staticfiles-filehashes'
+  }
+}

@@ -9,7 +9,7 @@
     <h1>{{ organisation.name }}</h1>
     <ul>
         {% for paw in organisation.paw_set.all %}
-            <li>{{ paw.name }}</li>
+            <li><a href="{% url 'organisation:organisation-paw-detail' organisation.slug paw.slug %}">{{ paw.name }}</a></li>
         {% endfor %}
     </ul>
 
