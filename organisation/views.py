@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 from django.views import generic
@@ -18,5 +19,13 @@ class DetailView(generic.DetailView):
     model = Organisation
 
 
-class ResultsView(generic.DetailView):
+class PawView(generic.DetailView):
     model = Organisation
+    template_name = 'paws/paw_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        pawSlug = self.kwargs.get('paw')
+        organisation = self.object
+        context['paw'] = get_object_or_404(organisation.paw_set, slug=pawSlug)
+        return context
