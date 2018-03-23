@@ -1,9 +1,10 @@
-from django.conf.urls.static import static
 from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
 from django.template.defaultfilters import slugify
-from django.utils.safestring import mark_safe
+from rest_framework.authtoken.models import Token
+
+from pawz import settings
 
 
 class Status(models.Model):

@@ -23,6 +23,7 @@ urlpatterns = [
     path('', include('core.urls')),
     url('^', include('django.contrib.auth.urls')),
     path('organisations/', include('organisation.urls')),
+    url(r'^api/', include('api.urls'))
 ]
 
 admin.site.site_header = _("Pawz")

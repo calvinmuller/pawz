@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import datetime
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
@@ -41,11 +43,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     # 'django.contrib.messages',
     'django.contrib.staticfiles',
+    'djcelery_email',
     'storages',
     'core',
     'organisation',
     'blog',
-    # 'rest_framework',  # Add this line
+    'rest_framework',  # Add this line
 ]
 
 MIDDLEWARE = [
@@ -57,6 +60,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'pawz.urls'
@@ -87,7 +91,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'USER': 'root',
-        'HOST': 'localhost',
+        'HOST': '127.0.0.1',
         'NAME': 'pawz'
     }
 }
@@ -153,11 +157,10 @@ MEDIA_URL = AWS_S3_CUSTOM_DOMAIN + '/'
 # Rest Framework
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
+        # 'rest_framework.permissions.IsAuthenticated',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
         'rest_framework.authentication.TokenAuthentication',
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
@@ -168,15 +171,34 @@ REST_FRAMEWORK = {
 # user auth stuff
 LOGIN_REDIRECT_URL = '/'
 
-
 # CACHING
 CACHES = {
-  'default': {
-    'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-    'LOCATION': '127.0.0.1:11211',
-  },
-  'staticfiles': {
-    'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-    'LOCATION': 'staticfiles-filehashes'
-  }
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': '127.0.0.1:11211',
+    },
+    'staticfiles': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'staticfiles-filehashes'
+    }
 }
+
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/1'
+
+EMAIL_HOST = 'mail.istreet.co.za'
+EMAIL_PORT = '587'
+EMAIL_HOST_USER = 'calvin@istreet.co.za'
+EMAIL_HOST_PASSWORD = 'Ryvenapa121@'
+EMAIL_USE_TLS = False  # TLS settings
+EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
+
+# JWT
+JWT_AUTH = {
+    'JWT_AUTH_HEADER_PREFIX': 'Bearer',
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7),
+    'JWT_ALLOW_REFRESH': True,
+}
+
+
+APPEND_SLASH=False
