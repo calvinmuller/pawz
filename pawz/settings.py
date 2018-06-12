@@ -31,7 +31,8 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost:8000',
     'pawzpython.herokuapp.com',
-    'localhost'
+    'localhost',
+    'pawzfinal-env.fwvgecpjxt.eu-west-1.elasticbeanstalk.com'
 ]
 
 # Application definition
@@ -183,8 +184,8 @@ CACHES = {
     }
 }
 
-CELERY_BROKER_URL = 'redis://localhost:6379/0'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/1'
+CELERY_BROKER_URL = os.environ.get('REDIS_URL', 'redis://localhost:6379/0')
+CELERY_RESULT_BACKEND = os.environ.get('REDIS_URL', 'redis://localhost:6379/1')
 
 EMAIL_HOST = 'mail.istreet.co.za'
 EMAIL_PORT = '587'
@@ -199,6 +200,5 @@ JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7),
     'JWT_ALLOW_REFRESH': True,
 }
-
 
 APPEND_SLASH=False

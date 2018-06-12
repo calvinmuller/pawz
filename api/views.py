@@ -23,6 +23,9 @@ class OrganisationViewSet(viewsets.ModelViewSet):
     queryset = Organisation.objects.all().order_by('-date_created')
     serializer_class = OrganisationSerializer
 
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
 
 class StatusViewSet(viewsets.ModelViewSet):
     """

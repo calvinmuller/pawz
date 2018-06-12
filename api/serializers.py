@@ -7,7 +7,7 @@ from core.models import Organisation, Status, Paw, Breed, Colour, PawImage
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'username', 'email', 'is_staff', 'is_active', 'last_login', 'date_joined')
+        fields = ('id', 'first_name', 'last_name', 'username', 'email', 'is_staff', 'is_active', 'last_login', 'date_joined')
 
 
 class StatusSerializer(serializers.HyperlinkedModelSerializer):
@@ -33,15 +33,13 @@ class PawImageSerializer(serializers.HyperlinkedModelSerializer):
         model = PawImage
         fields = ('id', 'image')
 
-class OrganisationSerializer(serializers.HyperlinkedModelSerializer):
+class OrganisationSerializer(serializers.ModelSerializer):
     owner = UserSerializer()
     status = StatusSerializer()
 
     class Meta:
         model = Organisation
-        fields = (
-        'id', 'name', 'slug', 'address', 'telephone', 'email', 'logo', 'owner', 'status', 'can_donate', 'date_created',
-        'date_modified', 'url', 'paw_set')
+        fields = ('__all__')
 
 class PawSerializer(serializers.HyperlinkedModelSerializer):
     organisation = OrganisationSerializer()
